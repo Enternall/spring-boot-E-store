@@ -1,0 +1,74 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet"  th:href="@{/css/auth.css}"/>
+    <link rel="stylesheet" th:href="@{/css/main.css}">
+</head>
+
+<body>
+    <div id="header">
+        <div class="header-container">
+            <a class = "toggle-btn" id="LK_leftbar" th:href="@{/home}">
+            </a>
+            <a class = "toggle-btn" id="LK_rightbar" th:href="@{/cart}">
+            </a>
+
+            Welcome to Your Profile
+
+        </div>
+    </div>
+    <div class="auth">
+        <div class="container">
+            <div class="row" >
+                    <form class="form" id="createAccount" th:action="@{register}" th:object="${userForm}" method="POST">
+                        <h1 class="form__title">Create Account</h1>
+                        <div class="form__input-group">
+                            <input type="text" th:field="*{username}" class="form__input" autofocus placeholder="Username"/>
+                            <div  class="form__input-error-message" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></div>
+                        </div>
+                        <div class="form__input-group">
+                            <input type="email" th:field="*{email}" class="form__input" autofocus placeholder="Email"/>
+                            <div  class="form__input-error-message" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
+                        </div>
+                        <div class="form__input-group">
+                            <input type="password" th:field="*{password}" class="form__input"  autofocus placeholder="password">
+                            <div th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="form__input-error-message"></div>
+                        </div>
+                        <div class="form__input-group">
+                            <input type="password" th:field="*{passwordConfirm}" class="form__input"  autofocus placeholder="confirm password">
+                            <div th:if="${#fields.hasErrors('passwordConfirm')}" th:errors="*{passwordConfirm}" class="form__input-error-message"></div>
+                        </div>
+                        <div class="form__input-group">
+                            <input type="text" th:field="*{firstName}" class="form__input"  autofocus placeholder="first name">
+                            <div th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}" class="form__input-error-message"></div>
+                        </div>
+                        <div class="form__input-group">
+                            <input type="text" th:field="*{lastName}" class="form__input"  autofocus placeholder="last name">
+                            <div th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}" class="form__input-error-message"></div>
+                        </div>
+                        <div class="form__input-group">
+                            <input type="text" th:field="*{city}" class="form__input"  autofocus placeholder="city">
+                            <div th:if="${#fields.hasErrors('city')}" th:errors="*{city}" class="form__input-error-message"></div>
+                        </div>
+                        <div class="form__input-group">
+                            <select th:field="*{gender}" class="form__input" required title="gender">
+                                <option value="HIDDEN" th:text="#{user.gender.hidden}">Hidden</option>
+                                <option value="MALE" th:text="#{user.gender.male}">Male</option>
+                                <option value="FEMALE" th:text="#{user.gender.female}">Female</option>
+                            </select>
+                            <div class="form__input-error-message" th:if="${#fields.hasErrors('gender')}" th:errors="*{gender}"></div>
+                        </div>
+                        <div class="form__input-group">
+                            <input type="number" th:field="*{age}" class="form__input"  autofocus placeholder="age" >
+                            <div th:if="${#fields.hasErrors('age')}" th:errors="*{age}" class="form__input-error-message"></div>
+                        </div>
+                        <button class="form__button" type="submit">Create</button>
+                    </form>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

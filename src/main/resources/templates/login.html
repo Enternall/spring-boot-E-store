@@ -1,0 +1,53 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Some shop</title>
+    <link rel="stylesheet"  th:href="@{/css/auth.css}"/>
+    <link rel="stylesheet" th:href="@{/css/main.css}">
+</head>
+
+<body>
+    <div id="header">
+        <div class="header-container">
+            <a class = "toggle-btn" id="LK_leftbar" th:href="@{/home}">
+            </a>
+            <a class = "toggle-btn" id="LK_rightbar" th:href="@{/cart}">
+            </a>
+
+            Welcome to Your Profile
+
+        </div>
+    </div>
+    <div class="auth">
+        <div class="container">
+            <div class="row">
+                <form autocomplete="off" th:action="@{/login}" class="form" id="login" method="POST">
+                    <h1 class="form__title">Login</h1>
+                    <div th:if="${param.logout}">
+                        <div class="form__message form__message--error" th:text="#{login.alert.logged_out}"></div>
+                    </div>
+                    <div class="form__input-group">
+                        <input  type="text" name="username" class="form__input" autofocus placeholder="Username or email" required="true" >
+                        <div class="form__input-error-message"></div>
+                    </div>
+                    <div class="form__input-group">
+                        <input type="password" name="password" class="form__input" autofocus placeholder="Password" required="true">
+                        <div class="form__input-error-message"></div>
+                    </div>
+                    <div th:if="${param.error}">
+                        <div class="form__message form__message--error" th:text="*{error}"></div>
+                    </div>
+                    <button class="form__button" th:value="#{user.log_in}" type="submit" name="login-sumbit" id="login-sumbit">Continue</button>
+                    <p class="form__text">
+                        <a class="form__link" th:href="@{/register}" id="linkCreateAccount">Don't have an account? Create account</a>
+                    </p>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

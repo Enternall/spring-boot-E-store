@@ -1,0 +1,62 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Some shop</title>
+    <link rel="icon" type="image/png" href="./assets/icon.png">
+    <link rel="stylesheet" th:href="@{/css/main.css}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sofia">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sofia&effect=fire">
+</head>
+<body>
+
+<header class="main-header">
+    <div class="layers">
+        <div class="layer__header font-effect-fire">
+            <div class="layers__caption ">
+                Welcome to Parallax
+            </div>
+            <div class="layers__title" th:href="@{/home}">
+                Some Shop
+            </div>
+        </div>
+        <div class="layer layers__base" ></div>
+        <div class="layer layers__middle" ></div>
+        <div class="layer layers__top" ></div>
+        <div class="layer layers__front" ></div>
+    </div>
+</header>
+
+<div id="header">
+    <div class="header-container">
+        <a class = "toggle-btn" id="leftbar" th:href="@{/user}"></a>
+        <a class = "LogOutButton"  sec:authorize="isAuthenticated()"  th:href="@{/logout}"></a>
+        <a class = "toggle-btn" id="rightbar" th:href="@{/cart}"></a>
+
+        Welcome to Some Shop
+
+    </div>
+</div>
+
+<div id="products" >
+    <ul class ="products-container" >
+        <li class ="products-element" th:each="product : ${products}">
+            <span class ="products-element__name" th:text="${product.getName()}"></span>
+            <img class ="products-element__img" th:if="${!product.getImageUrl().isEmpty()}" th:src="${product.getImageUrl()}"  />
+            <span class ="products-element__price" th:text="${product.getPrice()}+' USD'">
+                </span>
+            <a th:href="${'/cart/add/' + product.getId()}">
+                <button class="products-element__btn">
+                    Add
+                </button>
+            </a>
+        </li>
+    </ul>
+</div>
+
+<script th:src="@{/js/parallax.js}"></script>
+
+</body>
+</html>

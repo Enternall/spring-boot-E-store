@@ -1,0 +1,65 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Some shop</title>
+    <link rel="icon" type="image/png" href="./assets/icon.png">
+    <link rel="stylesheet" th:href="@{/css/main.css}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sofia">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sofia&effect=fire">
+</head>
+
+<body>
+<div id="Oplata_header">
+    <div class="LK_header-container">
+        <a class = "toggle-btn" id="OPLATA_leftbar" th:href="@{/home}">
+        </a>
+        <a class = "LogOutButton"  sec:authorize="isAuthenticated()"  th:href="@{/logout}"></a>
+        <a class = "toggle-btn" id="OPLATA_rightbar" th:href="@{/user}">
+        </a>
+        Welcome to Some Shop
+
+    </div>
+
+</div>
+<div id = "main-Oplata">
+
+    Ваша корзина:
+    <div class = "shopping-container" th:if="${!products.isEmpty()}">
+        <div id="remove" class = "korzinka" >
+            <table  th:each="product : ${products.entrySet()}">
+                <tr >
+                    <td class = "shopping-element__name" th:text="${product.getKey().getName()}"></td>
+                    <td class = "shopping-element__price" th:text="'Count: ' + ${product.getValue()}"> </td>
+                    <td class = "shopping-element__price" th:text="'Price: '+${product.getValue()*product.getKey().getPrice()} + ' '+ USD"> </td>
+                    <td  >
+                        <a th:href="@{'/cart/remove/{id}'(id=${product.getKey().getId()})}">
+                        <button type="button" class="Payment"  th:text="#{cart.remove}"></button>
+                        </a>
+                    </td>
+                </tr>
+
+            </table>
+        </div>
+        <div>
+            <tr>
+                <td class = "shopping-element__name">Total:</td>
+                <td class = "shopping-element__price" th:text="${totalPrice} +' '+ USD"></td>
+            </tr>
+        </div>
+    </div>
+    <div class-="shopping-container" th:if="${products.isEmpty()}" th:text="#{cart.empty}">
+
+    </div>
+        <a th:if="${!products.isEmpty()}" th:href="@{'/cart/checkout'}" >
+            <button class="Payment">
+                Purchase
+            </button>
+        </a>
+
+    </form>
+</div>
+
+</body>
+</html>

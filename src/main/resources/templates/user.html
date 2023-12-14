@@ -1,0 +1,47 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Some shop</title>
+    <link rel="icon" type="image/png" href="./assets/icon.png">
+    <link rel="stylesheet" th:href="@{/css/main.css}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sofia">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sofia&effect=fire">
+</head>
+
+<body>
+<div id="header">
+    <div class="header-container">
+        <a class = "toggle-btn" id="LK_leftbar" th:href="@{/home}">
+        </a>
+        <a class = "LogOutButton"  sec:authorize="isAuthenticated()"  th:href="@{/logout}"></a>
+        <a class = "toggle-btn" id="LK_rightbar" th:href="@{/cart}">
+        </a>
+
+        Welcome to Your Profile
+
+    </div>
+</div>
+<div id = "main-kabinet">
+    <div class = "Profile" >
+
+        <div class = "user__data" >
+                <img class ="user-element__img" th:src = "@{/assets/image.jpg}"/>
+        </div>
+        <div class = "user__data"> Личные Данные
+            <div class = "user__FIO">
+                <span>First name:<input class="text-field__input" th:value="${user.getFirstName()}" readonly> </span>
+                <span>Second name:<input class="text-field__input" th:value="${user.getLastName()}" readonly> </span>
+                <span>Age:<input class="text-field__input" th:value="${user.getAge()}" readonly> </span>
+                <span>City:<input class="text-field__input" th:value="${user.getCity()}" readonly> </span>
+                <span>Gender:<input class="text-field__input" th:value="${user.getGender()}" readonly> </span>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+</body>
+</html>

@@ -1,8 +1,8 @@
 package com.kursovaya.shop.service.impl;
 
-import com.kursovaya.shop.repository.UserRepository;
-import com.kursovaya.shop.service.UserService;
-import com.kursovaya.shop.domain.User;
+import com.kursovaya.shop.domain.Customer;
+import com.kursovaya.shop.repository.CustomerRepository;
+import com.kursovaya.shop.service.CustomerService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,25 +15,25 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
-public class UserServiceImpl implements UserService {
-    private static final Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
-    private final UserRepository userRepository;
+public class CustomerServiceImpl implements CustomerService {
+    private static final Logger logger = LoggerFactory.getLogger(CustomerServiceImpl.class);
+    private final CustomerRepository customerRepository;
     private final UserDetailsService userDetailsService;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
     private final AuthenticationManager authenticationManager;
 
     @Autowired
-    public UserServiceImpl(UserRepository userRepository, BCryptPasswordEncoder bCryptPasswordEncoder, UserDetailsService userDetailsService, AuthenticationManager authenticationManager) {
-        this.userRepository = userRepository;
+    public CustomerServiceImpl(CustomerRepository customerRepository, BCryptPasswordEncoder bCryptPasswordEncoder, UserDetailsService userDetailsService, AuthenticationManager authenticationManager) {
+        this.customerRepository = customerRepository;
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
         this.userDetailsService = userDetailsService;
         this.authenticationManager = authenticationManager;
     }
 
     @Override
-    public void save(User user) {
-        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-        userRepository.save(user);
+    public void save(Customer customer) {
+        customer.setPassword(bCryptPasswordEncoder.encode(customer.getPassword()));
+        customerRepository.save(customer);
     }
 
     @Override
@@ -51,17 +51,17 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User findByUsername(String username) {
-        return userRepository.findByUsername(username);
+    public Customer findByUsername(String username) {
+        return customerRepository.findByUsername(username);
     }
 
     @Override
-    public User findByEmail(String email) {
-        return userRepository.findByEmail(email);
+    public Customer findByEmail(String email) {
+        return customerRepository.findByEmail(email);
     }
 
     @Override
-    public User findById(long id) {
-        return userRepository.findById(id);
+    public Customer findById(long id) {
+        return customerRepository.findById(id);
     }
 }

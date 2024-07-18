@@ -1,7 +1,7 @@
 package com.kursovaya.shop.service.impl;
 
-import com.kursovaya.shop.domain.User;
-import com.kursovaya.shop.repository.UserRepository;
+import com.kursovaya.shop.domain.Customer;
+import com.kursovaya.shop.repository.CustomerRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,27 +20,27 @@ import java.util.Set;
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
     private static final Logger logger = LoggerFactory.getLogger(UserDetailsServiceImpl.class);
-    private final UserRepository userRepository;
+    private final CustomerRepository customerRepository;
 
     @Autowired
-    public UserDetailsServiceImpl(UserRepository userRepository) {
-        this.userRepository = userRepository;
+    public UserDetailsServiceImpl(CustomerRepository customerRepository) {
+        this.customerRepository = customerRepository;
     }
 
     @Override
     @Transactional(readOnly = true)
     public UserDetails loadUserByUsername(String username){
-        User user = userRepository.findByUsername(username);
+        Customer customer = customerRepository.findByUsername(username);
 
-        if (user != null) {
+        if (customer != null) {
             Set<GrantedAuthority> authorities = new HashSet<>();
             if (Objects.equals(username, "admin")) {
                 authorities.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
             }else {
                 authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
             }
-            logger.debug(String.format("User with name: %s and password: %s created.", user.getUsername(), user.getPassword()));
-            return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), authorities);
+            logger.debug(String.format("User with name: %s and password: %s created.", customer.getUsername(), customer.getPassword()));
+            return new org.springframework.security.core.userdetails.User(customer.getUsername(), customer.getPassword(), authorities);
         }else{
             throw new UsernameNotFoundException("User " + username + " not found!");
         }

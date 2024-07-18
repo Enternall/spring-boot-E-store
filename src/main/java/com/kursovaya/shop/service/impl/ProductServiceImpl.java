@@ -1,9 +1,8 @@
 package com.kursovaya.shop.service.impl;
 
-import com.kursovaya.shop.repository.ProductRepository;
 import com.kursovaya.shop.domain.Product;
+import com.kursovaya.shop.repository.ProductRepository;
 import com.kursovaya.shop.service.ProductService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -12,7 +11,6 @@ import java.util.List;
 public class ProductServiceImpl implements ProductService {
     private final ProductRepository productRepository;
 
-    @Autowired
     public ProductServiceImpl(ProductRepository productRepository){
         this.productRepository = productRepository;
     }
@@ -24,9 +22,9 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public void edit(long id, Product newProduct) {
-        Product found = productRepository.getOne(id);
+        Product found = productRepository.findById(id);
         found.setName(newProduct.getName());
-        found.setImageUrl(newProduct.getImageUrl());
+        found.setImage(newProduct.getImage());
         found.setPrice(newProduct.getPrice());
         save(newProduct);
     }

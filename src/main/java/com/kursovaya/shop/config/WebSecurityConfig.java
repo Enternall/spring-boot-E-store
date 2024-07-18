@@ -1,6 +1,6 @@
 package com.kursovaya.shop.config;
 
-import com.kursovaya.shop.repository.UserRepository;
+import com.kursovaya.shop.repository.CustomerRepository;
 import com.kursovaya.shop.service.impl.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -18,16 +18,16 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
-    private final UserRepository userRepository;
+    private final CustomerRepository customerRepository;
 
     @Autowired
-    public WebSecurityConfig(UserRepository userRepository) {
-        this.userRepository = userRepository;
+    public WebSecurityConfig(CustomerRepository customerRepository) {
+        this.customerRepository = customerRepository;
     }
 
     @Bean
     public UserDetailsService userDetailsService() {
-        return new UserDetailsServiceImpl(userRepository);
+        return new UserDetailsServiceImpl(customerRepository);
     }
 
 
@@ -46,7 +46,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable().authorizeRequests()
                 .antMatchers("/","/home","/index","/about","/help","/register","/cart/**").permitAll()
-                .antMatchers("/user/**").hasRole("USER")
+                .antMatchers("/customer/**").hasRole("USER")
                 .antMatchers("/admin/**","/product/new").hasRole("ADMIN")
                 .and().formLogin().loginPage("/login").permitAll()
                 .and().logout().invalidateHttpSession(true).clearAuthentication(true).logoutRequestMatcher(new AntPathRequestMatcher("/logout")).permitAll()

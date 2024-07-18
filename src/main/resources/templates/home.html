@@ -31,7 +31,7 @@
 
 <div id="header">
     <div class="header-container">
-        <a class = "toggle-btn" id="leftbar" th:href="@{/user}"></a>
+        <a class = "toggle-btn" id="leftbar" th:href="@{/customer}"></a>
         <a class = "LogOutButton"  sec:authorize="isAuthenticated()"  th:href="@{/logout}"></a>
         <a class = "toggle-btn" id="rightbar" th:href="@{/cart}"></a>
 
@@ -44,7 +44,7 @@
     <ul class ="products-container" >
         <li class ="products-element" th:each="product : ${products}">
             <span class ="products-element__name" th:text="${product.getName()}"></span>
-            <img class ="products-element__img" th:if="${!product.getImageUrl().isEmpty()}" th:src="${product.getImageUrl()}"  />
+            <img class ="products-element__img" th:if="${!product.getImage().isEmpty()}" th:src="${product.getImage()}"  />
             <span class ="products-element__price" th:text="${product.getPrice()}+' USD'">
                 </span>
             <a th:href="${'/cart/add/' + product.getId()}">

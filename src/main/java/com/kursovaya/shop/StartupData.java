@@ -1,8 +1,8 @@
 package com.kursovaya.shop;
 
-import com.kursovaya.shop.domain.User;
+import com.kursovaya.shop.domain.Customer;
 import com.kursovaya.shop.service.ProductService;
-import com.kursovaya.shop.service.UserService;
+import com.kursovaya.shop.service.CustomerService;
 import com.kursovaya.shop.domain.Product;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,14 +13,14 @@ import org.springframework.stereotype.Component;
 import java.math.BigDecimal;
 
 @Component
-public class StartupData implements CommandLineRunner {
-    private final UserService userService;
+public class  StartupData implements CommandLineRunner {
+    private final CustomerService customerService;
     private final ProductService productService;
     private static final Logger logger = LoggerFactory.getLogger(StartupData.class);
 
     @Autowired
-    public StartupData(UserService userService, ProductService productService) {
-        this.userService = userService;
+    public StartupData(CustomerService customerService, ProductService productService) {
+        this.customerService = customerService;
         this.productService = productService;
     }
 
@@ -32,19 +32,19 @@ public class StartupData implements CommandLineRunner {
     }
 
     private void userAccount(){
-        User user = new User();
+        Customer customer = new Customer();
 
-        user.setUsername("user");
-        user.setPassword("user");
-        user.setPasswordConfirm("user");
-        user.setGender("Male");
-        user.setEmail("user@example.com");
+        customer.setUsername("user");
+        customer.setPassword("user");
+        customer.setPasswordConfirm("user");
+        customer.setGender("Male");
+        customer.setEmail("user@example.com");
 
-        userService.save(user);
+        customerService.save(customer);
     }
 
     private void adminAccount(){
-        User admin = new User();
+        Customer admin = new Customer();
 
         admin.setUsername("admin");
         admin.setPassword("admin");
@@ -52,7 +52,7 @@ public class StartupData implements CommandLineRunner {
         admin.setGender("Male");
         admin.setEmail("admin@example.com");
 
-        userService.save(admin);
+        customerService.save(admin);
     }
 
     private void exampleProducts(){
@@ -70,31 +70,31 @@ public class StartupData implements CommandLineRunner {
         Product product7 = new Product();
 
         product1.setName("Quadricycle LG");
-        product1.setImageUrl("/assets/Product1.png");
+        product1.setImage("/assets/Product1.png");
         product1.setPrice(new BigDecimal(15500));
 
         product2.setName("Ice for kitchen");
-        product2.setImageUrl("assets/Product2.png");
+        product2.setImage("assets/Product2.png");
         product2.setPrice(new BigDecimal(1399));
 
         product3.setName("Sofa GUCCI");
-        product3.setImageUrl("assets/Product3.png");
+        product3.setImage("assets/Product3.png");
         product3.setPrice(new BigDecimal(799));
 
         product4.setName("Bicycle NVIDIA");
-        product4.setImageUrl("assets/Product4.png");
+        product4.setImage("assets/Product4.png");
         product4.setPrice(new BigDecimal(400));
 
         product5.setName("Hairband Smart TV");
-        product5.setImageUrl("assets/Product5.png");
+        product5.setImage("assets/Product5.png");
         product5.setPrice(new BigDecimal(550));
 
         product6.setName("Walk in a desert");
-        product6.setImageUrl("assets/Product6.png");
+        product6.setImage("assets/Product6.png");
         product6.setPrice(new BigDecimal(350));
 
         product7.setName("Toy Desert Eagle");
-        product7.setImageUrl("assets/Product7.png");
+        product7.setImage("assets/Product7.png");
         product7.setPrice(new BigDecimal(1000));
 
         productService.save(product1);

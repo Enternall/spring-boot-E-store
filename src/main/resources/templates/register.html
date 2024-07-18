@@ -22,7 +22,7 @@
     <div class="auth">
         <div class="container">
             <div class="row" >
-                    <form class="form" id="createAccount" th:action="@{register}" th:object="${userForm}" method="POST">
+                    <form class="form" id="createAccount" th:action="@{register}" th:object="${customerForm}" method="POST">
                         <h1 class="form__title">Create Account</h1>
                         <div class="form__input-group">
                             <input type="text" th:field="*{username}" class="form__input" autofocus placeholder="Username"/>
@@ -54,9 +54,9 @@
                         </div>
                         <div class="form__input-group">
                             <select th:field="*{gender}" class="form__input" required title="gender">
-                                <option value="HIDDEN" th:text="#{user.gender.hidden}">Hidden</option>
-                                <option value="MALE" th:text="#{user.gender.male}">Male</option>
-                                <option value="FEMALE" th:text="#{user.gender.female}">Female</option>
+                                <option value="HIDDEN" th:text="#{customer.gender.hidden}">Hidden</option>
+                                <option value="MALE" th:text="#{customer.gender.male}">Male</option>
+                                <option value="FEMALE" th:text="#{customer.gender.female}">Female</option>
                             </select>
                             <div class="form__input-error-message" th:if="${#fields.hasErrors('gender')}" th:errors="*{gender}"></div>
                         </div>

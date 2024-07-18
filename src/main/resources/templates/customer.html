@@ -28,15 +28,15 @@
     <div class = "Profile" >
 
         <div class = "user__data" >
-                <img class ="user-element__img" th:src = "@{/assets/image.jpg}"/>
+                <img class ="customer-element__img" th:src = "@{/assets/image.jpg}"/>
         </div>
         <div class = "user__data"> Личные Данные
             <div class = "user__FIO">
-                <span>First name:<input class="text-field__input" th:value="${user.getFirstName()}" readonly> </span>
-                <span>Second name:<input class="text-field__input" th:value="${user.getLastName()}" readonly> </span>
-                <span>Age:<input class="text-field__input" th:value="${user.getAge()}" readonly> </span>
-                <span>City:<input class="text-field__input" th:value="${user.getCity()}" readonly> </span>
-                <span>Gender:<input class="text-field__input" th:value="${user.getGender()}" readonly> </span>
+                <span>First name:<input class="text-field__input" th:value="${customer.getFirstName()}" readonly> </span>
+                <span>Second name:<input class="text-field__input" th:value="${customer.getLastName()}" readonly> </span>
+                <span>Age:<input class="text-field__input" th:value="${customer.getAge()}" readonly> </span>
+                <span>City:<input class="text-field__input" th:value="${customer.getCity()}" readonly> </span>
+                <span>Gender:<input class="text-field__input" th:value="${customer.getGender()}" readonly> </span>
             </div>
         </div>
     </div>

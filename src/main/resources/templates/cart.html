@@ -16,7 +16,7 @@
         <a class = "toggle-btn" id="OPLATA_leftbar" th:href="@{/home}">
         </a>
         <a class = "LogOutButton"  sec:authorize="isAuthenticated()"  th:href="@{/logout}"></a>
-        <a class = "toggle-btn" id="OPLATA_rightbar" th:href="@{/user}">
+        <a class = "toggle-btn" id="OPLATA_rightbar" th:href="@{/customer}">
         </a>
         Welcome to Some Shop
 
@@ -26,15 +26,15 @@
 <div id = "main-Oplata">
 
     Ваша корзина:
-    <div class = "shopping-container" th:if="${!products.isEmpty()}">
-        <div id="remove" class = "korzinka" >
-            <table  th:each="product : ${products.entrySet()}">
-                <tr >
-                    <td class = "shopping-element__name" th:text="${product.getKey().getName()}"></td>
-                    <td class = "shopping-element__price" th:text="'Count: ' + ${product.getValue()}"> </td>
-                    <td class = "shopping-element__price" th:text="'Price: '+${product.getValue()*product.getKey().getPrice()} + ' '+ USD"> </td>
-                    <td  >
-                        <a th:href="@{'/cart/remove/{id}'(id=${product.getKey().getId()})}">
+    <div class = "shopping-container" th:if="${!items.isEmpty()}">
+        <div id="remove" class = "korzinka">
+            <table  th:each="item : ${items}">
+                <tr>
+                    <td class = "shopping-element__name" th:text="${item.getProduct().getName()}"></td>
+                    <td class = "shopping-element__price" th:text="'Quantity: ' + ${item.getQuantity}"> </td>
+                    <td class = "shopping-element__price" th:text="'Price: '+${item.getQuantity * item.getProduct().getPrice()} + ' '+ USD"> </td>
+                    <td>
+                        <a th:href="@{'/cart/remove/{id}'(id=${item.getProduct().getId()})}">
                         <button type="button" class="Payment"  th:text="#{cart.remove}"></button>
                         </a>
                     </td>
@@ -49,10 +49,16 @@
             </tr>
         </div>
     </div>
-    <div class-="shopping-container" th:if="${products.isEmpty()}" th:text="#{cart.empty}">
+    <div class-="shopping-container" th:if="${items.isEmpty()}" th:text="#{cart.empty}">
 
     </div>
-        <a th:if="${!products.isEmpty()}" th:href="@{'/cart/checkout'}" >
+        <a th:if="${!items.isEmpty()}" th:href="@{'/cart/clear'}" >
+            <button class="Payment">
+                Clear
+            </button>
+        </a>
+
+        <a th:if="${!items.isEmpty()}" th:href="@{'/cart/checkout'}" >
             <button class="Payment">
                 Purchase
             </button>
